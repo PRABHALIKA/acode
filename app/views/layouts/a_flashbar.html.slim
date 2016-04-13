@@ -1,0 +1,11 @@
+.col-xs-12.col-md-12#flashy
+  - if notice.present?
+    .alert.alert-success.fade.in
+      a[href="#" class="close" data-dismiss="alert"]
+        | &times;
+      = notice
+  - if alert.present?
+    .alert.alert-danger.fade.in
+      a[href="#" class="close" data-dismiss="alert"]
+        | &times;
+      = alert

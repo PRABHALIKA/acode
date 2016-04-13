@@ -1,0 +1,41 @@
+// Place all the styles related to the statuses controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.new_status {
+  display: none;
+}
+
+.person_name > a {
+  font-weight: bold;
+}
+
+.person_name {
+  margin-left: 5px;
+  padding-left: 0px;
+  left: 0px;
+}
+
+.person_name > a:hover, .person_name > a:focus {
+  color: #2a6496;
+  text-decoration: none;
+}
+
+.person_img {
+  padding-left: 15px;
+  padding-right: 0px;
+  width: 65px;
+}
+
+#status-update > a:hover,  #status-update > a:focus {
+  text-decoration: none;
+}
+
+.person_status {
+  padding-left: 0px;
+  margin-left: 5px;
+}
+
+.imagy {
+  margin-top: 10px;
+}

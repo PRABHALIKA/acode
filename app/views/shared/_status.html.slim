@@ -1,0 +1,7 @@
+= link_to 'Update status', '#', id: 'status-update'
+.new_status
+	hr
+	= simple_form_for Status.new, html: {multipart: true} do |f|
+		= f.input :status, as: :text, required: true, autofocus: true
+		= f.input :statachment, as: :file, label: 'Attach here', html: {multiple: true}
+		= f.submit "Post", class: 'btn btn-primary btn-block'

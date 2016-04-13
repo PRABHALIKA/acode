@@ -1,0 +1,18 @@
+- user = activity.user
+- friend = activity.friend
+.row
+  .col-xs-3.col-md-2.person_img
+    = link_to (image_tag user.avatar.url :normal, alt: user.full_name, class: 'img img-responsive'),  user_path(user)
+  .col-xs-9.col-md-10
+    .row
+      .col-xs-6.col-md-6.person_name
+        = link_to user.full_name, user_path(user)
+      .col-xs-4.col-md-4.timey
+        = link_to get_date(activity), '#', title: "#{activity.created_at}"
+    .row
+      .col-xs-12.col-md-12.person_status
+        | you and 
+        = link_to friend.full_name, friend
+        |  are now friends
+        br
+        hr

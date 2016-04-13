@@ -1,0 +1,2 @@
+module SwitchUserAccountsHelper
+end

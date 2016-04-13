@@ -1,0 +1,24 @@
+- user = activity.user
+.row
+  .col-xs-3.col-md-2.person_img
+    = link_to (image_tag user.avatar.url :normal, alt: user.full_name, class: 'img img-responsive'),  user_path(user)
+  .col-xs-9.col-md-10
+    .row
+      .col-xs-6.col-md-6.person_name
+        = link_to user.full_name, user_path(user)
+      .col-xs-4.col-md-4.timey
+        = link_to get_date(activity), '#', title: "#{activity.created_at}", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'
+    .row
+      .col-xs-12.col-md-12.person_status
+        - if activity.status.to_s.length > 500
+          = activity.status[0,501].to_s.html_safe + '...'
+          = link_to 'see more', activity
+        - else
+          = activity.status.html_safe
+        br
+.row
+  - if activity.statachment.present?
+    .col-xs-12.col-md-12.imagy
+      = image_tag activity.statachment.url :medium, alt: activity.statachment_file_name, class: 'img img-responsive'
+br
+hr

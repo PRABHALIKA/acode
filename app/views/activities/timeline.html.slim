@@ -1,0 +1,21 @@
+.row
+  .col-sm-3
+    .carryer.panel.panel-default
+      p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+      quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+      consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+      cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+      proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  .col-sm-6
+    .row.col-sm-12.well[style = "margin-left: 0px;"]
+      = render 'shared/status'
+    .row.col-sm-12.well[style = "margin-left: 0px;"]
+      - if @activities.present?
+        - @activities.each do |activity|
+          = render partial: 'statuses', locals: {:activity => activity} if activity.is_a? Status
+          = render partial: 'relation', locals: {:activity => activity} if activity.is_a? Relation
+      - else
+        p No activity yet
+  .col-sm-3
+    = render partial: 'friends', locals: {}

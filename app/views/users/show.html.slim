@@ -1,0 +1,17 @@
+.row
+  .col-md-12
+    = image_tag @user.avatar.url(:profile), alt: @user.full_name
+    - if @user != current_user
+      = link_to @user.full_name, switch_switch_user_account_path(@user.id)
+      = binding.pry
+      - if current_user.friend?(current_user,@user)
+        = link_to "Unfriend", relation_path(@relation), user: @user, method: :delete, data: {confirm: 'Are you sure? This action cannot be undone'}, class: 'btn btn-danger'
+      - else
+        = button_to "Add Friend", relations_path(friend_id: @user) if @user != current_user
+    - else
+      = @user.full_name
+    hr
+    = link_to 'Edit', edit_user_registration_path
+    - if $original_user
+      hr
+      = link_to "Original User", switch_back_switch_user_account_path(current_user.id)

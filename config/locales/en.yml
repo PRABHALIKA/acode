@@ -21,3 +21,17 @@
 
 en:
   hello: "Hello world"
+  registrations:
+    sign_up: "Sign Up"
+    hint: "Minimum age should be %{mimimum_age} years (date format: %{date_holder})"
+    min_password_length: "%{min_password_length} characters minimum"
+    date_holder: "dd/mm/yyyy"
+  sessions:
+    log_in: "Log in"
+  relations:
+    successful: "Successful"
+  status:
+    update_status: "Update Status"
+  shared:
+    invalid_request: "Invalid Request"
+    false_success: "Could not perform the operation. Please try later"

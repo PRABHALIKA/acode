@@ -1,0 +1,4 @@
+$('#notice_wrapper').before("<div id = 'notice_wrapper'> Successfully Destroyed </div>");
+$("#clear_status_<%= @status.id %>").fadeOut(250, function(){
+    $(this).remove();
+});

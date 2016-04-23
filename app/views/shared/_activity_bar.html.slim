@@ -1,0 +1,6 @@
+table
+	tr
+  	td = link_to 'Like', '#', class: 'btn btn-block'
+  	td = link_to 'Comment', '#', class: 'btn btn-block'
+  	- if status.user == current_user
+  		td = link_to 'Delete', status_path(status), method: :delete, remote: true, data: {confirm: 'Are you sure'}, class: 'delete_status btn btn-block'

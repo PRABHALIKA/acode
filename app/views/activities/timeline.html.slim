@@ -15,6 +15,7 @@
         - @activities.each do |activity|
           = render partial: 'statuses', locals: {:activity => activity} if activity.is_a? Status
           = render partial: 'relation', locals: {:activity => activity} if activity.is_a? Relation
+        = paginate @activities
       - else
         p No activity yet
   .col-sm-3

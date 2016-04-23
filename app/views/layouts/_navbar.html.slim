@@ -18,5 +18,6 @@ nav.navbar.navbar-default
               button.btn.btn-danger[type = "button"]
                 span.glyphicon.glyphicon-search
       ul.nav.navbar-nav.navbar-right
+        li = link_to 'All', users_path
         li = image_tag(current_user.avatar.url(:normal), title: "#{current_user.full_name}", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom')
         li = link_to 'Log out', destroy_user_session_path, title: "Are you sure?", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'

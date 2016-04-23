@@ -26,6 +26,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #A3
 gem 'devise'
 gem 'slim'
+gem 'slim-rails'
 gem 'thin'
 gem 'bootstrap-sass'
 gem 'simple_form'
@@ -33,6 +34,7 @@ gem 'paperclip'
 gem 'angularjs-rails'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
+gem 'kaminari'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

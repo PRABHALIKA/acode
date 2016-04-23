@@ -1,0 +1,8 @@
+.row
+	.col-md-3
+	.col-md-3
+		- @users.each do |user|
+			ul
+				= image_tag user.avatar.url(:normal)
+				= link_to user.full_name, user
+			hr

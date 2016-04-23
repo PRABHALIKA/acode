@@ -3,17 +3,19 @@ class Status < ActiveRecord::Base
   validates :status, presence: true, length: { minimum: 5 }
   # Associations
   belongs_to :user
+  has_many :comments, as: :commentable
   # Attachments
-  has_attached_file :statachment, styles: { medium: "508x286>" },
+  has_attached_file :statachment, styles: { medium: "508x286#" },
                     url: "/assets/statachments/:id/:style/:basename.:extension",
                     path: ":rails_root/public/assets/statachments/:id/:style/:basename.:extension"
   validates_attachment_content_type :statachment, { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png", "application/pdf"] }
   validates_attachment_size :statachment, less_than: 5.megabytes
   # custom validations
-  validate :statachment_dimensions
+  #validate :statachment_dimensions
   # Search
   searchable do
     text :status
+    integer :subject
     integer :id
     integer :user_id
     date :created_at

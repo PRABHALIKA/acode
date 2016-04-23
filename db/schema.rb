@@ -11,14 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160413090625) do
+ActiveRecord::Schema.define(version: 20160423080505) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
 
   create_table "relations", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "status"
+    t.string   "subject"
   end
 
   add_index "relations", ["friend_id", "user_id"], name: "index_relations_on_friend_id_and_user_id", unique: true
@@ -34,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160413090625) do
     t.string   "statachment_content_type"
     t.integer  "statachment_file_size"
     t.datetime "statachment_updated_at"
+    t.string   "subject"
   end
 
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id"

@@ -14,12 +14,11 @@ class User < ActiveRecord::Base
   # Custom validations
   validate :date_of_birth
   # Associations
-  has_many :activities
-  has_many :statuses
-  has_many :relations
-  has_many :friends, through: :relations
+  has_many :statuses, dependent: :destroy
+  has_many :relations, dependent: :destroy
+  has_many :friends, through: :relations, dependent: :destroy
   # Attachments
-  has_attached_file :avatar, styles: { normal: '50x50>', profile: '100x100>'},
+  has_attached_file :avatar, styles: { normal: '50x50#', profile: '100x100#'},
                     default_url: "users/:style/missingdp.jpeg",
                     url: "/assets/users/:id/:style/:basename.:extension",
                     path: ":rails_root/public/assets/users/:id/:style/:basename.:extension"
@@ -38,8 +37,7 @@ class User < ActiveRecord::Base
   # Return true if current_user and friend are friends
   def friend?(current_user,friend)
     (friend && 
-        Relation.where(user_id: current_user.id, friend_id: friend).present? &&
-        Relation.where(user_id: friend, friend_id: current_user.id).present?)? true : false
+    Relation.where(user_id: current_user.id, friend_id: friend, subject: Constants::Subject::MAKE).present?) ? true : false
   end
 
   def date_of_birth

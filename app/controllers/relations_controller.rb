@@ -1,37 +1,31 @@
 class RelationsController < ApplicationController
   def create
     if params[:friend_id]
-      if Relation.where(user_id: current_user.id, friend_id: params[:friend_id]).present?
-        redirect_to user_path(params[:friend_id]), notice: "Already friends"
-      elsif current_user.id == params[:friend_id]
-        redirect_to user_path(params[:friend_id]), notice: "Invalid Request"
+      @relation = Relation.where(user_id: current_user.id, friend_id: params[:friend_id], subject: Constants::Subject::BREAK).first
+      if @relation.present?
+        @relation.update_attribute(:subject, Constants::Subject::MAKE)
       else
-        @relation = current_user.relations.new(friend_id: params[:friend_id], status: Constants::Status::MAKE)
-        if @relation.save
-          friend = User.find(params[:friend_id])
-          friend.relations.create!(friend_id: current_user.id, status: Constants::Status::MAKE)
-          redirect_to user_path(params[:friend_id]), notice: "Added as friend"
-        else
-          redirect_to user_path(params[:friend_id]), notice: "Could not add as friend"
-        end
+        @relation = Relation.new(user_id: current_user.id, friend_id: params[:friend_id], subject: Constants::Subject::MAKE)
+        @relation.save
       end
-    else
-      redirect_to current_user, notice: "Invalid Request"
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
   def destroy
-    binding.pry
     if params[:id]
       relation = Relation.where(id: params[:id]).first
       if relation.present?
-        relation.update_attribute(:status, Constants::Status::BREAK)
-        redirect_to root_path, notice: "Successful"
+        make_subject(relation, Constants::Subject::BREAK)
+        binding.pry
+        redirect_to @user, notice: t('relations.successful')
       else
-        redirect_to root_path, notice: "Could not delete. Please try later"
+        redirect_to root_path, alert: t('shared.false_success')
       end
     else
-      redirect_to current_user, notice: "Invalid Request"
+      redirect_to current_user, alert: t('shared.invalid_request')
     end
   end
 end

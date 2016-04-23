@@ -1,0 +1,23 @@
+button#add_friend data-type = "Relation" data-href = "#{relations_path(friend_id: @user)}" data-user_id = "#{current_user.id}" data-friend_id = "#{@user.id}"
+  |  Add friend
+
+def create
+  if params[:friend_id]
+    if Relation.where(user_id: current_user.id, friend_id: params[:friend_id]).present?
+      redirect_to user_path(params[:friend_id]), notice: "Already friends"
+    elsif current_user.id == params[:friend_id]
+      redirect_to user_path(params[:friend_id]), alert: "Invalid Request"
+    else
+      @relation = current_user.relations.new(friend_id: params[:friend_id], subject: Constants::Subject::MAKE)
+      if @relation.save
+        friend = User.find(params[:friend_id])
+        friend.relations.create!(friend_id: current_user.id, subject: Constants::Subject::MAKE)
+        redirect_to user_path(params[:friend_id]), notice: "Added as friend"
+      else
+        redirect_to user_path(params[:friend_id]), alert: "Could not add as friend"
+      end
+    end
+  else
+    redirect_to current_user, notice: "Invalid Request"
+  end
+end

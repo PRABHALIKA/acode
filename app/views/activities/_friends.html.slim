@@ -1,7 +1,9 @@
 .carryer.panel.panel-default
-  - my_friends = current_user.friends
-  - if my_friends.present?
-    - current_user.friends.each do |friend|
+  - my_relations = current_user.relations.where(subject: Constants::Subject::MAKE).flatten
+  - if my_relations.present?
+    - my_relations.each do |relation|
+      - friend = relation.friend
       = link_to friend.full_name, friend
+      hr
   - else
     p Find some friends

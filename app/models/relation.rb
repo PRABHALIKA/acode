@@ -9,7 +9,7 @@ class Relation < ActiveRecord::Base
     integer :user_id
     integer :friend_id
     date :created_at
-    integer :status
+    integer :subject
   end
 
   def relativity

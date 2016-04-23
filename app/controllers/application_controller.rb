@@ -13,8 +13,16 @@ class ApplicationController < ActionController::Base
     new_user_session_path
   end
 
-  def update_user_id(activity)
-    activity.update_attribute(:user_id, current_user.id)
+  def update_user_id(status, subject = Constants::Subject::MAKE)
+    if status && status.update_attribute(:user_id, current_user.id)
+      make_subject(status, subject)
+    end
+  end
+
+  def make_subject(activity, subject)
+    if activity
+      activity.update_attribute(:subject, subject)
+    end
   end
 
   protected
@@ -30,16 +38,5 @@ class ApplicationController < ActionController::Base
           |u| u.permit(registration_params) 
         }
       end
-    end
-
-    def set_user_channel_cookie
-      key = current_user.channel_key
-      WebsocketRails[key].make_private
-      cookies[USER_CHANNEL_KEY] = {:value => key,
-                                     :expires => 30.days.from_now }
-    end
-
-    def clear_user_channel_cookie
-      cookies.delete USER_CHANNEL_KEY
     end
 end

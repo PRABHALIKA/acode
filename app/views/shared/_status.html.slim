@@ -1,7 +1,15 @@
-= link_to 'Update status', '#', id: 'status-update'
+= link_to t('status.update_status'), '#', id: 'status-update', class: 'btn btn-default'
 .new_status
 	hr
-	= simple_form_for Status.new, html: {multipart: true} do |f|
+	= simple_form_for Status.new do |f|
 		= f.input :status, as: :text, required: true, autofocus: true
-		= f.input :statachment, as: :file, label: 'Attach here', html: {multiple: true}
-		= f.submit "Post", class: 'btn btn-primary btn-block'
+		= f.input :statachment, as: :file, label: 'Attach here'
+		.row
+			.col-md-3
+				= f.submit "Draft", name: Constants::DRAFT, class: 'btn btn-success btn-block'
+			.col-md-3
+				= f.submit "Post", class: 'btn btn-primary btn-block', id: 'status_post'
+			.col-md-3
+				= link_to 'Clear', '#', class: 'btn btn-danger btn-block', id: "status_clear"
+			.col-md-3
+				= link_to 'Close', '#', class: 'btn btn-default btn-block', id: "status_close"

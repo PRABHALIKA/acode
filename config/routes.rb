@@ -10,8 +10,15 @@ Rails.application.routes.draw do
   resources :activities do
     get :timeline, on: :collection
   end
-  resources :statuses
-  resources :relations
+  resources :statuses do
+    resources :comments
+  end
+  resources :relations do
+    resources :comments
+  end
+  resources :comments do
+    resources :comments
+  end
 
   resources :switch_user_accounts do
     member do

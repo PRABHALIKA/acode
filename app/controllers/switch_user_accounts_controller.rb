@@ -13,14 +13,10 @@ class SwitchUserAccountsController < ApplicationController
   end
 
   def switch_back
-    if $original_user && $non_original_user
-      sign_out $non_original_user
-      sign_in $original_user
-      $non_original_user = nil
-      $original_user = nil
-      redirect_to current_user
-    else
-      redirect_to current_user, notice: "Could not switch back to original user"
-    end
+    sign_out $non_original_user
+    sign_in $original_user
+    $non_original_user = nil
+    $original_user = nil
+    redirect_to current_user
   end
 end

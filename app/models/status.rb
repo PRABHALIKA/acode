@@ -5,7 +5,7 @@ class Status < ActiveRecord::Base
   belongs_to :user
   has_many :comments, as: :commentable
   # Attachments
-  has_attached_file :statachment, styles: { medium: "508x286#" },
+  has_attached_file :statachment, styles: { medium: "508x286>" },
                     url: "/assets/statachments/:id/:style/:basename.:extension",
                     path: ":rails_root/public/assets/statachments/:id/:style/:basename.:extension"
   validates_attachment_content_type :statachment, { content_type: ["image/jpeg", "image/jpg", "image/gif", "image/png", "application/pdf"] }

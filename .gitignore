@@ -2,6 +2,7 @@ ra-*.html
 .rspec
 /log
 /solr/
+solr/*
 /public/
 /tmp
 /db/*.sqlite3

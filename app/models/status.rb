@@ -4,6 +4,7 @@ class Status < ActiveRecord::Base
   # Associations
   belongs_to :user
   has_many :comments, as: :commentable
+  has_one :notification
   # Attachments
   has_attached_file :statachment, styles: { medium: "508x286>" },
                     url: "/assets/statachments/:id/:style/:basename.:extension",
@@ -12,6 +13,7 @@ class Status < ActiveRecord::Base
   validates_attachment_size :statachment, less_than: 5.megabytes
   # custom validations
   #validate :statachment_dimensions
+  
   # Search
   searchable do
     text :status
@@ -28,6 +30,12 @@ class Status < ActiveRecord::Base
       dimensions = Paperclip::Geometry.from_file(statachment.queued_for_write[:original].path)
       errors.add(:image, "Width must be #{width}px") unless dimensions.width < required_width
       errors.add(:image, "Height must be #{height}px") unless dimensions.height < required_height
+    end
+  end
+
+  def notify_friends
+    Relation.where(friend_id: self.user.id, subject: Constants::Subject::MAKE).each do |relation|
+      self.user.notify(self, relation.user)
     end
   end
 end

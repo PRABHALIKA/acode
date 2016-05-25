@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :notifications
+  resources :messages
+
   resources :switch_user_accounts do
     member do
       get 'switch'

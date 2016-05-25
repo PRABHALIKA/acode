@@ -15,4 +15,9 @@ module ActivitiesHelper
     end
     return r
   end
+
+  def get_title(activity)
+    title = activity.created_at
+    title.strftime("#{title.day.ordinalize} %h %Y, %H:%M")
+  end
 end

@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423080505) do
+ActiveRecord::Schema.define(version: 20160523100901) do
+
+  create_table "chats", force: :cascade do |t|
+    t.string   "subject"
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "chats", ["recipient_id"], name: "index_chats_on_recipient_id"
+  add_index "chats", ["user_id"], name: "index_chats_on_user_id"
 
   create_table "comments", force: :cascade do |t|
     t.text     "content"
@@ -22,6 +33,29 @@ ActiveRecord::Schema.define(version: 20160423080505) do
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type"
+
+  create_table "messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.boolean  "seen",         default: false
+    t.text     "content"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "activity_id"
+    t.integer  "user_id"
+    t.integer  "recipient_id"
+    t.boolean  "seen"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "activity_type"
+  end
+
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id"
 
   create_table "relations", force: :cascade do |t|
     t.integer  "user_id"

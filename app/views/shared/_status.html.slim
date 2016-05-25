@@ -6,9 +6,9 @@
 		= f.input :statachment, as: :file, label: 'Attach here'
 		.row
 			.col-md-3
-				= f.submit "Draft", name: Constants::DRAFT, class: 'btn btn-success btn-block'
+				= f.submit "Draft", name: Constants::DRAFT, class: 'btn btn-success btn-block', data: {disable_with: "Posting"}
 			.col-md-3
-				= f.submit "Post", class: 'btn btn-primary btn-block', id: 'status_post'
+				= f.submit "Post", class: 'btn btn-primary btn-block', id: 'status_post', data: {disable_with: "Posting"}
 			.col-md-3
 				= link_to 'Clear', '#', class: 'btn btn-danger btn-block', id: "status_clear"
 			.col-md-3

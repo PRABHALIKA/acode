@@ -17,12 +17,16 @@ class User < ActiveRecord::Base
   has_many :statuses, dependent: :destroy
   has_many :relations, dependent: :destroy
   has_many :friends, through: :relations, dependent: :destroy
+  has_many :notifications
+  has_many :messages
   # Attachments
   has_attached_file :avatar, styles: { normal: '50x50#', profile: '100x100#'},
                     default_url: "users/:style/missingdp.jpeg",
                     url: "/assets/users/:id/:style/:basename.:extension",
                     path: ":rails_root/public/assets/users/:id/:style/:basename.:extension"
   validates_attachment_content_type :avatar, content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  
+  # scopes
   
   # Gives the full name of user
   def full_name
@@ -38,6 +42,10 @@ class User < ActiveRecord::Base
   def friend?(current_user,friend)
     (friend && 
     Relation.where(user_id: current_user.id, friend_id: friend, subject: Constants::Subject::MAKE).present?) ? true : false
+  end
+
+  def notify(activity, recipient)
+    self.notifications.create!(recipient_id: recipient.id, seen: false, activity_id: activity.id, activity_type: activity.class.name.to_s)
   end
 
   def date_of_birth

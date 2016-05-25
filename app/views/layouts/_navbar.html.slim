@@ -18,6 +18,19 @@ nav.navbar.navbar-default
               button.btn.btn-danger[type = "button"]
                 span.glyphicon.glyphicon-search
       ul.nav.navbar-nav.navbar-right
+        li.vertical
+        li = link_to notifications_path do
+            span.glyphicon.glyphicon-bell[type="button"]
+            span.badge
+              = get_resource_count("Notification") if get_resource_count("Notification")
+        li.vertical
+        li = link_to messages_path do
+            span.glyphicon.glyphicon-comment[type="button"]
+            span.badge
+              = get_resource_count("Message") if get_resource_count("Message")
+        li.vertical
         li = link_to 'All', users_path
+        li.vertical
         li = image_tag(current_user.avatar.url(:normal), title: "#{current_user.full_name}", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom')
+        li.vertical
         li = link_to 'Log out', destroy_user_session_path, title: "Are you sure?", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'

@@ -9,7 +9,7 @@ div id = dom_id(activity, 'clear')
           = link_to user.full_name, user
       .row
         .col-xs-12.col-md-12.timey
-          = link_to get_date(activity), '#', title: "#{activity.created_at}", 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'
+          = link_to get_date(activity), '#', title: get_title(activity), 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'
       .row
         .col-xs-12.col-md-12.person_status
           - if activity.status.to_s.length > Constants::Subject::OFF_LENGTH
@@ -21,7 +21,8 @@ div id = dom_id(activity, 'clear')
   .row
     - if activity.statachment.present?
       .col-xs-12.col-md-12.imagy
-        = image_tag activity.statachment.url :medium, alt: activity.statachment_file_name, class: 'img img-responsive'
+        .img.img-thumbnail
+          = image_tag activity.statachment.url :medium, alt: activity.statachment_file_name, class: 'img img-responsive'
     = render partial: 'shared/activity_bar', locals: {:status => activity}
   br
   hr

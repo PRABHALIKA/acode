@@ -24,3 +24,5 @@ jQuery ->
   $('#status_close').click ->
     $('.new_status').slideUp 350
   $('#notice_wrapper').fadeOut 4500
+  #$("#status_post").click ->
+  #  $(this).attr('disabled', 'disabled')

@@ -17,10 +17,11 @@ class RelationsController < ApplicationController
   def destroy
     if params[:id]
       relation = Relation.where(id: params[:id]).first
+      user_id = relation.friend_id
       if relation.present?
         make_subject(relation, Constants::Subject::BREAK)
         binding.pry
-        redirect_to @user, notice: t('relations.successful')
+        redirect_to user_path user_id, notice: t('relations.successful')
       else
         redirect_to root_path, alert: t('shared.false_success')
       end

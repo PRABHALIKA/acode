@@ -1,0 +1,13 @@
+.modal.fade#myModal[role="dialog"]
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button[type="button" class="close" data-dismiss="modal"]
+          |  &times;
+        h4.modal-title
+          |  Send Message
+      .modal-body
+        = render "messages/form"
+      .modal-footer
+        button[type="button" class="btn btn-default" data-dismiss="modal"]
+          |  Close

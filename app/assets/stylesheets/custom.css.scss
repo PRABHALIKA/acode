@@ -136,3 +136,47 @@ abbr {
   vertical-align: middle;
   white-space: nowrap;
 }
+
+.vertical {
+  height: 50px;
+  //border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+.glyphicon.glyphicon-bell {
+  font-size: 1em;
+  color: white;
+  z-index: 1;
+}
+
+.badge {
+  z-index: 2;
+  background-color: #428bca;
+  border-radius: 5px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 10px;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: baseline;
+  white-space: nowrap;
+}
+
+.form-control {
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+  color: #555555;
+  display: block;
+  font-size: 14px;
+  height: 34px;
+  line-height: 1.42857;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+}

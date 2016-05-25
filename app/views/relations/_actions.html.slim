@@ -1,4 +1,4 @@
 - if current_user.friend?(current_user,@user)
-  = link_to "Unfriend", relation_path(@relation,@user), method: :delete, data: { confirm: 'Are you sure? This action cannot be undone' }, class: 'btn'
+  = link_to "Unfollow", relation_path(@relation,@user), method: :delete, data: { confirm: 'Are you sure? This action cannot be undone' }, class: 'btn'
 - elsif @user != current_user
   = link_to "Add friend", relations_path(friend_id: @user.id), method: :post, remote: true, class: 'btn', id: "add_friend_btn"

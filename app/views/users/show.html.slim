@@ -9,7 +9,7 @@
     - else
       = @user.full_name
     hr
-    = link_to 'Edit', edit_user_registration_path
+    = link_to 'Edit', edit_user_registration_path if @user == current_user
     - if $original_user
       hr
       = link_to "Original User", switch_back_switch_user_account_path(current_user.id)    

@@ -11,6 +11,7 @@ class StatusesController < ApplicationController
         redirect_to timeline_activities_path, notice: 'Status drafted. Check in your drafts'
       else
         update_user_id(@status)
+        @status.notify_friends
         redirect_to timeline_activities_path, notice: 'Status Posted!'
       end
     else

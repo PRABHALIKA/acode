@@ -1,6 +1,8 @@
 @import "bootstrap";
 @import "bootstrap-sprockets";
 
+$defblue: #428bca;
+
 .panel_header h3 {
 	margin-top: 3px;
 	margin-bottom: 3px;
@@ -41,7 +43,7 @@ abbr {
 }
 
 .navbar-default {
-  /*background-color: #428BCA;*/
+  /*background-color: $defblue;*/
   background-color: black;
   border-color: #E7E7E7;
 }
@@ -105,7 +107,7 @@ abbr {
     }
   }
   .info {
-    background-color: #428BCA;
+    background-color: $defblue;
     opacity: 0.8;
     p {
       color: white;
@@ -151,7 +153,7 @@ abbr {
 
 .badge {
   z-index: 2;
-  background-color: #428bca;
+  background-color: $defblue;
   border-radius: 5px;
   color: #fff;
   display: inline-block;

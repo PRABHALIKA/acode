@@ -1,0 +1,7 @@
+br
+.new_comment
+  = simple_form_for [@commentable, Comment.new] do |f|
+    = f.input :content, as: :text, required: true, autofocus: true
+    = f.input :statachment, as: :file, label: 'Attach here'
+    .pull-left
+      = f.submit "Post", class: 'btn btn-success btn-block', data: {disable_with: "Posting"}

@@ -1,14 +1,16 @@
 .container
   .row
-    - Notification.where(recipient_id: current_user.id).order(:created_at).each do |notif|
+    - Notification.where(recipient_id: current_user.id).order(created_at: :desc).each do |notif|
       - if notif.activity_type == 'Status'
         .row 
           .col-xs-3.col-md-2.person_img
             = link_to (image_tag notif.user.avatar.url :normal, alt: notif.user.full_name, class: 'img img-responsive'),  notif.user
           .col-xs-9.col-md-10
             .row
-              .col-xs-12.col-md-12
+              .col-xs-9.col-md-9
                 = link_to notif.user.full_name
                 |  has updated status to 
                 = link_to (Status.where(id: notif.activity_id).first.status.to_s[0,30] + '...'), Status.where(id: notif.activity_id).first
-        hr
+              .col-xs-3.col-md-3
+                = get_title(Status.where(id: notif.activity_id).first)
+        hr.hr_class

@@ -18,11 +18,11 @@ div id = dom_id(activity, 'clear')
           - else
             = activity.status.html_safe
           br
-  .row
-    - if activity.statachment.present?
-      .col-xs-12.col-md-12.imagy
-        .img.img-thumbnail
-          = image_tag activity.statachment.url :medium, alt: activity.statachment_file_name, class: 'img img-responsive'
-    = render partial: 'shared/activity_bar', locals: {:status => activity}
-  br
+      .row
+        - if activity.statachment.present?
+          .col-xs-12.col-md-12.imagy
+            .img.img-thumbnail
+              = image_tag activity.statachment.url :medium, alt: activity.statachment_file_name, class: 'img img-responsive'
+        = render partial: 'shared/activity_bar', locals: {:status => activity}
+      br
   hr

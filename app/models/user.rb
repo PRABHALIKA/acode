@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
         if (year <= 1900) || (year >= (Date.today.year - 10))
           errors.add :base, 'Enter valid year, minimum age should be 10 years'
         else
-          validate_days mon, day
+          validate_days mon, day, year
         end
       end
     else
@@ -70,12 +70,12 @@ class User < ActiveRecord::Base
     end
   end
 
-  def validate_days(mon, days)
+  def validate_days(mon, days, year)
     case mon
     when 1 || 3 || 5 || 7 || 8 || 10 || 12
       month_days days, 31
     when 02
-      if Date.leap year
+      if Date.leap? year
         month_days days, 29
       else
         month_days days, 28
